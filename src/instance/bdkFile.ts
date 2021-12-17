@@ -36,7 +36,7 @@ export default class BdkFile {
     this.orgPath = ''
   }
 
-  public getRootFilePath () {
+  public getRootFilePath (): string  {
     return this.bdkPath
   }
 
@@ -45,20 +45,20 @@ export default class BdkFile {
     return parse(fs.readFileSync(this.envPath).toString()) as unknown as ConfigEnvType
   }
 
-  public createEnv (initEnv: ConfigEnvType) {
+  public createEnv (initEnv: ConfigEnvType): void  {
     fs.mkdirSync(`${this.config.infraConfig.bdkPath}`, { recursive: true })
     fs.writeFileSync(this.envPath, stringify(initEnv))
   }
 
-  public deleteNetworkFolder () {
+  public deleteNetworkFolder (): void  {
     fs.rmdirSync(`${this.bdkPath}`, { recursive: true })
   }
 
-  public createNetworkFolder () {
+  public createNetworkFolder (): void  {
     fs.mkdirSync(`${this.bdkPath}`, { recursive: true })
   }
 
-  public createCaFolder () {
+  public createCaFolder (): void  {
     fs.mkdirSync(`${this.bdkPath}/ca`, { recursive: true })
   }
 
@@ -74,26 +74,26 @@ export default class BdkFile {
     fs.mkdirSync(`${this.bdkPath}/tlsca/${orgDomainName}`, { recursive: true })
   }
 
-  public createChannelFolder (channelName: string) {
+  public createChannelFolder (channelName: string): void  {
     fs.mkdirSync(`${this.bdkPath}/channel-artifacts/${channelName}`, { recursive: true })
   }
 
-  public createCryptoConfigYaml (cryptoConfigYaml: CryptoConfigYaml) {
+  public createCryptoConfigYaml (cryptoConfigYaml: CryptoConfigYaml): void  {
     this.createConfigYamlFolder()
     fs.writeFileSync(`${this.bdkPath}/config-yaml/crypto-config.yaml`, cryptoConfigYaml.getYamlString())
   }
 
-  public createConfigtx (configtxYaml: ConfigtxYaml) {
+  public createConfigtx (configtxYaml: ConfigtxYaml): void  {
     this.createConfigYamlFolder()
     fs.writeFileSync(`${this.bdkPath}/config-yaml/configtx.yaml`, configtxYaml.getYamlString())
   }
 
-  public createConfigtxPeerOrg (peerOrg: PeerOrganizationInterface) {
+  public createConfigtxPeerOrg (peerOrg: PeerOrganizationInterface): void  {
     this.createConfigYamlOrgsFolder()
     fs.writeFileSync(`${this.bdkPath}/config-yaml/orgs/peer-${peerOrg.Name}.json`, JSON.stringify(peerOrg))
   }
 
-  public createConfigtxOrdererOrg (OrdererOrg: OrdererOrganizationInterface) {
+  public createConfigtxOrdererOrg (OrdererOrg: OrdererOrganizationInterface): void  {
     this.createConfigYamlOrgsFolder()
     fs.writeFileSync(`${this.bdkPath}/config-yaml/orgs/orderer-${OrdererOrg.Name}.json`, JSON.stringify(OrdererOrg))
   }
@@ -120,12 +120,12 @@ export default class BdkFile {
     return configtxOrgs
   }
 
-  public copyOrdererOrgTLSCa (hostname: string, domain: string) {
+  public copyOrdererOrgTLSCa (hostname: string, domain: string): void  {
     this.createTlsFolder(`${hostname}.${domain}`)
     fs.copyFileSync(`${this.bdkPath}/ordererOrganizations/${domain}/orderers/${hostname}.${domain}/tls/ca.crt`, `${this.bdkPath}/tlsca/${hostname}.${domain}/ca.crt`)
   }
 
-  public copyPeerOrgTLSCa (hostname: string, domain: string) {
+  public copyPeerOrgTLSCa (hostname: string, domain: string): void  {
     this.createTlsFolder(`${hostname}.${domain}`)
     fs.copyFileSync(`${this.bdkPath}/peerOrganizations/${domain}/peers/${hostname}.${domain}/tls/ca.crt`, `${this.bdkPath}/tlsca/${hostname}.${domain}/ca.crt`)
   }
@@ -155,7 +155,7 @@ export default class BdkFile {
     return fs.readFileSync(`${this.bdkPath}/org-json/${name}-consenter.json`).toString()
   }
 
-  public createConnectionFile (name: string, domain: string, connectionProfileYaml: ConnectionProfileYaml) {
+  public createConnectionFile (name: string, domain: string, connectionProfileYaml: ConnectionProfileYaml): void  {
     fs.writeFileSync(`${this.bdkPath}/peerOrganizations/${domain}/connection-${name}.json`, connectionProfileYaml.getJsonString())
     fs.writeFileSync(`${this.bdkPath}/peerOrganizations/${domain}/connection-${name}.yaml`, connectionProfileYaml.getYamlString())
   }
@@ -180,7 +180,7 @@ export default class BdkFile {
     return `${this.getExplorerRootFilePath()}/docker-compose.yaml`
   }
 
-  public createDockerComposeYaml (hostName: string, dockerComposeYaml: OrdererDockerComposeYaml | PeerDockerComposeYaml | CaDockerComposeYaml) {
+  public createDockerComposeYaml (hostName: string, dockerComposeYaml: OrdererDockerComposeYaml | PeerDockerComposeYaml | CaDockerComposeYaml): void  {
     const type: InstanceTypeEnum = (() => {
       if (dockerComposeYaml instanceof OrdererDockerComposeYaml) {
         return InstanceTypeEnum.orderer
@@ -196,7 +196,7 @@ export default class BdkFile {
     fs.writeFileSync(this.getDockerComposeYamlPath(hostName, type), dockerComposeYaml.getYamlString())
   }
 
-  public createExplorerDockerComposeYaml (explorerConnectionProfileYaml: ExplorerDockerComposeYaml) {
+  public createExplorerDockerComposeYaml (explorerConnectionProfileYaml: ExplorerDockerComposeYaml): void  {
     this.createExplorerFolder()
     fs.writeFileSync(this.getExplorerDockerComposeYamlPath(), explorerConnectionProfileYaml.getYamlString())
   }
@@ -205,7 +205,7 @@ export default class BdkFile {
     return YAML.load(fs.readFileSync(this.getDockerComposeYamlPath(hostName, type)).toString()) as DockerComposeYamlInterface
   }
 
-  public createOrgConfigEnv (address: string, dotEnv: string) {
+  public createOrgConfigEnv (address: string, dotEnv: string): void  {
     fs.mkdirSync(`${this.bdkPath}/env`, { recursive: true })
     fs.writeFileSync(`${this.bdkPath}/env/${address}.env`, dotEnv)
   }
@@ -214,30 +214,30 @@ export default class BdkFile {
     fs.mkdirSync(`${this.bdkPath}/config-yaml/${channelName}Channel`, { recursive: true })
   }
 
-  public createChannelConfigtx (channelName: string, configtxYaml: ConfigtxYaml) {
+  public createChannelConfigtx (channelName: string, configtxYaml: ConfigtxYaml): void  {
     this.createChannelConfigtxFolder(channelName)
     fs.writeFileSync(`${this.bdkPath}/config-yaml/${channelName}Channel/configtx.yaml`, configtxYaml.getYamlString())
   }
 
-  public createChannelArtifact (channelName: string) {
+  public createChannelArtifact (channelName: string): void  {
     fs.mkdirSync(`${this.bdkPath}/channel-artifacts/${channelName}`, { recursive: true })
   }
 
-  public createChaincodeFolder () {
+  public createChaincodeFolder (): void  {
     fs.mkdirSync(`${this.bdkPath}/chaincode`, { recursive: true })
   }
 
-  public createOrgDefinitionJson (name: string, orgJson: string) {
+  public createOrgDefinitionJson (name: string, orgJson: string): void  {
     fs.mkdirSync(`${this.bdkPath}/org-json`, { recursive: true })
     fs.writeFileSync(`${this.bdkPath}/org-json/${name}.json`, orgJson)
   }
 
-  public createOrdererOrgConsenterJson (name: string, consenterJson: string) {
+  public createOrdererOrgConsenterJson (name: string, consenterJson: string): void  {
     fs.mkdirSync(`${this.bdkPath}/org-json`, { recursive: true })
     fs.writeFileSync(`${this.bdkPath}/org-json/${name}-consenter.json`, consenterJson)
   }
 
-  public createExportOrgDefinitionJson (exportOrgJson: OrgJsonType, file: string) {
+  public createExportOrgDefinitionJson (exportOrgJson: OrgJsonType, file: string): void  {
     const splitFilePath = file.split('/', 3)
     for (let i = 0; i < splitFilePath.length - 1; i++) {
       fs.mkdirSync(`${splitFilePath[i]}`, { recursive: true })
@@ -245,18 +245,18 @@ export default class BdkFile {
     fs.writeFileSync(`${file}`, JSON.stringify(exportOrgJson))
   }
 
-  public createChannelConfigJson (channelName: string, fileName: string, channelConfigJson: string) {
+  public createChannelConfigJson (channelName: string, fileName: string, channelConfigJson: string): void  {
     fs.writeFileSync(`${this.bdkPath}/channel-artifacts/${channelName}/${fileName}.json`, channelConfigJson)
   }
 
-  public createExplorerConnectionProfile (networkName: string, explorerConnectionProfileYaml: ExplorerConnectionProfileYaml) {
+  public createExplorerConnectionProfile (networkName: string, explorerConnectionProfileYaml: ExplorerConnectionProfileYaml): void  {
     this.createExplorerFolder()
     fs.writeFileSync(
       `${this.getExplorerRootFilePath()}/connection-profile/${networkName}.json`, explorerConnectionProfileYaml.getJsonString(),
     )
   }
 
-  public createExplorerConfig (explorerConfig: ExplorerConfigYaml) {
+  public createExplorerConfig (explorerConfig: ExplorerConfigYaml): void  {
     this.createExplorerFolder()
     fs.writeFileSync(
       `${this.getExplorerRootFilePath()}/config.json`, explorerConfig.getJsonString(),
@@ -287,7 +287,7 @@ export default class BdkFile {
     this.orgPath = `${this.bdkPath}/${type}Organizations/${orgName}`
   }
 
-  public caFormatOrg (orgName: string, clientId: string, type: string, hostname: string) {
+  public caFormatOrg (orgName: string, clientId: string, type: string, hostname: string): void  {
     this.setOrgPath(hostname, type)
 
     fs.mkdirSync(`${this.orgPath}/ca`, { recursive: true })
@@ -316,7 +316,7 @@ export default class BdkFile {
     fs.writeFileSync(`${this.orgPath}/msp/config.yaml`, 'NodeOUs:\n  Enable: true\n  ClientOUIdentifier:\n    OrganizationalUnitIdentifier: client\n  PeerOUIdentifier:\n    OrganizationalUnitIdentifier: peer\n  AdminOUIdentifier:\n    OrganizationalUnitIdentifier: admin\n  OrdererOUIdentifier:\n    OrganizationalUnitIdentifier: orderer\n')
   }
 
-  public caFormatOrderer (orgName: string, ordererName: string, hostname: string) {
+  public caFormatOrderer (orgName: string, ordererName: string, hostname: string): void  {
     this.setOrgPath(hostname, 'orderer')
 
     fs.mkdirSync(`${this.orgPath}/orderers/${ordererName}/msp/admincerts`, { recursive: true })
@@ -364,7 +364,7 @@ export default class BdkFile {
     })
   }
 
-  public caFormatPeer (orgName: string, peerName: string, hostname: string) {
+  public caFormatPeer (orgName: string, peerName: string, hostname: string): void  {
     this.setOrgPath(hostname, 'peer')
 
     fs.mkdirSync(`${this.orgPath}/peers/${peerName}/msp/admincerts`, { recursive: true })
@@ -418,7 +418,7 @@ export default class BdkFile {
     })
   }
 
-  public caFormatUser (orgName: string, userName: string, type: string, hostname: string) {
+  public caFormatUser (orgName: string, userName: string, type: string, hostname: string): void  {
     this.setOrgPath(hostname, type)
 
     fs.mkdirSync(`${this.orgPath}/users/${userName}`, { recursive: true })
@@ -463,7 +463,7 @@ export default class BdkFile {
     fs.mkdirSync(`${this.bdkPath}/chaincode/package-id`, { recursive: true })
   }
 
-  public savePackageId (chaincodeLabel: string, packageId: string) {
+  public savePackageId (chaincodeLabel: string, packageId: string): void  {
     this.createPackageIdFolder()
     fs.writeFileSync(`${this.bdkPath}/chaincode/package-id/${chaincodeLabel}`, packageId)
   }

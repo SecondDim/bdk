@@ -19,7 +19,7 @@ export default class Config extends AbstractService {
    * @description 初始化 blockchain network 環境變數設定
    * @returns .env 檔案（在 ~/.bdk 資料夾底下）
    */
-  public init (args: ConfigEnvType = defaultEnv) {
+  public init (args: ConfigEnvType = defaultEnv): void  {
     logger.debug('Config init')
 
     const initEnv = Object.assign({}, defaultEnv, args)
@@ -29,7 +29,7 @@ export default class Config extends AbstractService {
   /**
    * @description 設定/修改 blockchain network 環境變數設定
    */
-  public set (args: ConfigSetType) {
+  public set (args: ConfigSetType): void  {
     logger.debug(`Config set: set ${args.key} to ${args.value}`)
 
     const envObj = this.bdkFile.getEnv()

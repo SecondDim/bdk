@@ -92,7 +92,7 @@ export default class Orderer extends AbstractService {
    * @description 複製 TLS CA 到 blockchain network 底下指定的資料夾
    * @returns 複製 TLS CA 到 blockchain network 底下的資料夾 tlsca/[peer hostname 的名稱].[domain 的名稱]/ca.crt
    */
-  public copyTLSCa (dto: OrgOrdererCreateType) {
+  public copyTLSCa (dto: OrgOrdererCreateType): void  {
     const { ordererOrgs } = dto
     ordererOrgs.forEach((ordererOrg: NetworkCreateOrdererOrgType) => {
       logger.debug(`Orderer create copyTLSCa: ${ordererOrg.name}`)
@@ -106,7 +106,7 @@ export default class Orderer extends AbstractService {
    * @description 在 orderer org 新增一個 orderer
    * @returns  orderer org 的 docker compose yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/docker-compose/[domain 的名稱]/docker-compose-orderer-[orderer 的 hostname].[orderer org 的名稱].yaml）
    */
-  public add (dto: OrdererAddType) { // if port[i] is not undefine, use this port and publish a container's port to the host. else use default port.
+  public add (dto: OrdererAddType): void  { // if port[i] is not undefine, use this port and publish a container's port to the host. else use default port.
     logger.debug('Orderer add')
 
     this.createOrdererOrgDockerComposeYaml(dto.orgName || this.config.orgName, dto.orgDomain || this.config.orgDomainName, dto.ordererHostnames, dto.genesisFileName, dto.ports)
@@ -116,7 +116,7 @@ export default class Orderer extends AbstractService {
    * @description 產生多個 peer org 的 docker compose
    * @returns  peer org 的 docker compose yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/docker-compose 底下）
    */
-  public createDockerCompose (dto: OrgOrdererCreateType) {
+  public createDockerCompose (dto: OrgOrdererCreateType): void  {
     const { ordererOrgs, genesisFileName } = dto
 
     if (!genesisFileName) {
@@ -138,7 +138,7 @@ export default class Orderer extends AbstractService {
    * @param ports - orderer org 中 port 設定
    * @returns orderer org 的 docker compose yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/docker-compose/[domain 的名稱]/docker-compose-orderer-[orderer 的 hostname].[orderer org 的名稱].yaml）
    */
-  public createOrdererOrgDockerComposeYaml (ordererName: string, ordererDomain: string, ordererHostnames: string[], genesisFileName: string, ports?: NetworkOrdererPortType[]) {
+  public createOrdererOrgDockerComposeYaml (ordererName: string, ordererDomain: string, ordererHostnames: string[], genesisFileName: string, ports?: NetworkOrdererPortType[]): void  {
     ordererHostnames.forEach((hostname, i) => {
       const ordererDockerComposeYaml = new OrdererDockerComposeYaml()
 

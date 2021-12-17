@@ -67,27 +67,27 @@ class DockerComposeYaml extends BdkYaml<DockerComposeYamlInterface> {
     super(value || { version: '3.5', services: {}, volumes: {}, networks: {} })
   }
 
-  public addService (serviceName: string, service: ServiceInterface) {
+  public addService (serviceName: string, service: ServiceInterface): void  {
     this.value.services[serviceName] = service
   }
 
-  public addVolume (volumeName: string, volume: VolumeInterface) {
+  public addVolume (volumeName: string, volume: VolumeInterface): void  {
     this.value.volumes[volumeName] = volume
   }
 
-  public addNetwork (networkName: string, network: NetworkInterface) {
+  public addNetwork (networkName: string, network: NetworkInterface): void  {
     this.value.networks[networkName] = network
   }
 
-  public setServices (services: { [serviceName: string]: ServiceInterface }) {
+  public setServices (services: { [serviceName: string]: ServiceInterface }): void  {
     this.value.services = services
   }
 
-  public setVolumes (volumes: { [volumeName: string]: VolumeInterface }) {
+  public setVolumes (volumes: { [volumeName: string]: VolumeInterface }): void  {
     this.value.volumes = volumes
   }
 
-  public setNetworks (networks: { [networkName: string]: NetworkInterface }) {
+  public setNetworks (networks: { [networkName: string]: NetworkInterface }): void  {
     this.value.networks = networks
   }
 }

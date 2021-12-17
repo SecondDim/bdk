@@ -8,7 +8,7 @@ export default class Org extends AbstractService {
   /**
    * @description 匯入 org 的 json 設定檔
    */
-  public importConfig (data: OrgJsonType[]) {
+  public importConfig (data: OrgJsonType[]): void  {
     data.forEach(org => {
       logger.debug(`Import org config: ${org.name}`)
 
@@ -20,7 +20,7 @@ export default class Org extends AbstractService {
    * @description 匯出 org 的 json 設定檔
    * @param path 匯出檔案的路徑
    */
-  public exportConfig (path: string) {
+  public exportConfig (path: string): void  {
     const orgJson = this.bdkFile.getOrgConfigJson(this.config.orgName)
     const exportPeerOrgJson: OrgJsonType = {
       name: this.config.orgName,

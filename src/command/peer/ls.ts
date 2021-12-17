@@ -7,7 +7,7 @@ export const desc = '[TODO]'
 
 export const builder = {}
 
-export const handler = (argv: Arguments) => {
+export const handler = (argv: Arguments): void  => {
   logger.debug('exec peer org ls', argv.$0)
   // TODO
 }

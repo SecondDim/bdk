@@ -29,7 +29,7 @@ export default class Network extends AbstractService {
    * @description 建立 blockchain network
    * @returns blockchain network 名稱的資料夾（在 ～/.bdk 資料夾底下）
    */
-  public createNetworkFolder () {
+  public createNetworkFolder (): void  {
     this.bdkFile.createNetworkFolder()
   }
 
@@ -76,7 +76,7 @@ export default class Network extends AbstractService {
    * @description 複製 TLS CA 到 blockchain network 底下指定的資料夾
    * @returns 複製 TLS CA 到 blockchain network 底下的資料夾 tlsca/[peer hostname 的名稱].[domain 的名稱]/ca.crt
    */
-  public copyTLSCa (dto: NetworkCreateType) {
+  public copyTLSCa (dto: NetworkCreateType): void  {
     logger.debug(`Network create copyTLSCa: ${this.config.networkName}`)
 
     dto.ordererOrgs && dto.ordererOrgs.forEach((ordererOrg: NetworkCreateOrdererOrgType) => {
@@ -107,7 +107,7 @@ export default class Network extends AbstractService {
    * @description 產生 blockahin network 的連線設定 yaml 檔案
    * @returns blockchain network 連線設定的 yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/peerOrganizations/[domain 的名稱]/connection-[peer org 的名稱].yaml）
    */
-  public createConnectionProfile (dto: NetworkCreateType) {
+  public createConnectionProfile (dto: NetworkCreateType): void  {
     logger.debug(`Network create connection config profile: ${this.config.networkName}`)
 
     if (dto.peerOrgs === undefined) {
@@ -121,7 +121,7 @@ export default class Network extends AbstractService {
    * @description 產生 blockchain network 的 docker-compose.yaml 檔案
    * @returns peer org 和 orderer org 的 docker compose yaml 檔案
    */
-  public createDockerCompose (dto: NetworkCreateType) {
+  public createDockerCompose (dto: NetworkCreateType): void  {
     logger.debug(`Network create docker-compose-{ordererOrgName/peerOrgName}.yaml: ${this.config.networkName}`)
 
     dto.ordererOrgs && dto.ordererOrgs.forEach((ordererOrg: NetworkCreateOrdererOrgType) => {

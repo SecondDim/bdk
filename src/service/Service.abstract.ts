@@ -28,7 +28,7 @@ export abstract class AbstractService {
 
   static readonly parser: ParserType
 
-  public setInfra (infra: InfraRunner<InfraRunnerResultType>) {
+  public setInfra (infra: InfraRunner<InfraRunnerResultType>): void  {
     this.infra = InfraStrategy.createRunner(infra)
   }
 }

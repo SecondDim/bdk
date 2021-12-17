@@ -15,14 +15,14 @@ export class FabricContainerError extends BdkError {
   }
 }
 
-export const onCancel = (prompt: prompts.PromptObject<string>, answers: any) => {
+export const onCancel = (prompt: prompts.PromptObject<string>, answers: any): void  => {
   config.isDevMode && console.log(prompt)
   config.isDevMode && console.log(answers)
   logger.warn('prompts cancel: Are you send [SIGINT]?')
   process.exit(130)
 }
 
-export const errorHandler = (err: Error) => {
+export const errorHandler = (err: Error): void  => {
   if (err instanceof FabricContainerError) {
     logger.error(err.message)
   } else if (err instanceof BdkError) {

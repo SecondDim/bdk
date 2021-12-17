@@ -17,7 +17,7 @@ class CaDockerComposeYaml extends DockerComposeYaml {
     upstreamEnabled?: boolean,
     csr?: CaCsrType,
     intermediate?: CaIntermediateType,
-  ) {
+  ): void  {
     // TODO name can same as hosts name
     const caEnv: string[] = [
       `FABRIC_CA_SERVER_PORT=${basic.port}`,

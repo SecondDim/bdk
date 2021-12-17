@@ -7,7 +7,7 @@ export const desc = '[TODO] Remove one peer in org'
 
 export const builder = {}
 
-export const handler = (argv: Arguments) => {
+export const handler = (argv: Arguments): void  => {
   logger.debug('exec peer remove', argv.$0)
   // TODO
 }

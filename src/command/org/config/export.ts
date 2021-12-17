@@ -17,7 +17,7 @@ export const builder = (yargs: Argv<OptType>) => {
     .option('out', { type: 'string', description: '匯出的檔案', alias: 'o' })
 }
 
-export const handler = (argv: Arguments<OptType>) => {
+export const handler = (argv: Arguments<OptType>): void  => {
   const org = new Org(config)
 
   const out: string = (() => {

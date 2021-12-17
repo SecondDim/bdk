@@ -6,11 +6,11 @@ export const command = 'ls'
 
 export const desc = '列出所有 Cathay BDK 此時環境變數'
 
-export const builder = (yargs: Argv) => {
+export const builder = (yargs: Argv): Argv  => {
   return yargs
 }
 
-export const handler = () => {
+export const handler = (): void  => {
   const configService = new Config(config)
 
   const envConfig = configService.ls()

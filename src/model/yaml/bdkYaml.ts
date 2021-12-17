@@ -11,7 +11,7 @@ class BdkYaml<T> {
     return YAML.dump(this.value, { forceQuotes: true })
   }
 
-  public getJsonString () {
+  public getJsonString (): string  {
     return JSON.stringify(this.value)
   }
 

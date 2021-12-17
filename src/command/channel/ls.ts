@@ -7,7 +7,7 @@ export const desc = '[TODO] List all channel in network'
 
 export const builder = {}
 
-export const handler = (argv: Arguments) => {
+export const handler = (argv: Arguments): void  => {
   logger.debug('exec channel ls', argv.$0)
   // TODO
 }

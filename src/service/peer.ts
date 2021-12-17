@@ -79,7 +79,7 @@ export default class Peer extends AbstractService {
    * @description 複製 TLS CA 到 blockchain network 底下指定的資料夾
    * @returns 複製 TLS CA 到 blockchain network 底下的資料夾 tlsca/[peer hostname 的名稱].[domain 的名稱]/ca.crt
    */
-  public copyTLSCa (dto: OrgPeerCreateType) {
+  public copyTLSCa (dto: OrgPeerCreateType): void  {
     const { peerOrgs } = dto
     peerOrgs.forEach((peerOrg: NetworkCreatePeerOrgType) => {
       logger.debug(`Peer create copyTLSCa: ${peerOrg.name}`)
@@ -93,7 +93,7 @@ export default class Peer extends AbstractService {
    * @description 產生 peer org 的連線設定 yaml 檔案
    * @returns peer org 連線設定的 yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/peerOrganizations/[domain 的名稱]/connection-[peer org 的名稱].yaml）
    */
-  public createConnectionProfileYaml (dto: OrgPeerCreateType) {
+  public createConnectionProfileYaml (dto: OrgPeerCreateType): void  {
     const { peerOrgs } = dto
     peerOrgs.forEach((peerOrg) => {
       logger.debug(`Peer create connection config: ${peerOrg.name}`)
@@ -119,7 +119,7 @@ export default class Peer extends AbstractService {
    * @description 在 peer org 新增 peer
    * @returns  peer org 的 docker compose yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/docker-compose/[domain 的名稱]/docker-compose-peer-[peer 的 hostname].[peer org 的名稱].yaml）
    */
-  public add (dto: PeerAddType) { // if port[i] is not undefine, use this port and publish a container's port to the host. else use default port.
+  public add (dto: PeerAddType): void  { // if port[i] is not undefine, use this port and publish a container's port to the host. else use default port.
     logger.debug('Peer add')
 
     this.createPeerOrgDockerComposeYaml(dto.orgName || this.config.orgName, dto.orgDomain || this.config.orgDomainName, dto.peerCount, dto.ports)
@@ -129,7 +129,7 @@ export default class Peer extends AbstractService {
    * @description 產生多個 peer org 的 docker compose
    * @returns  peer org 的 docker compose yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/docker-compose 底下）
    */
-  public createDockerCompose (dto: OrgPeerCreateType) {
+  public createDockerCompose (dto: OrgPeerCreateType): void  {
     const { peerOrgs } = dto
     peerOrgs.forEach((peerOrg) => {
       logger.debug(`Peer create docker-compose: ${peerOrg.name}`)
@@ -145,7 +145,7 @@ export default class Peer extends AbstractService {
    * @param ports - [{@link NetworkPeerPortType} array] peer org 中 port 設定
    * @returns  peer org 的 docker compose yaml 檔案（在 ~/.bdk/[blockchain network 名稱]/docker-compose/[domain 的名稱]/docker-compose-peer-[peer 的 hostname].[peer org 的名稱].yaml）
    */
-  public createPeerOrgDockerComposeYaml (peerName: string, peerDomain: string, peerCount: number, ports?: NetworkPeerPortType[]) {
+  public createPeerOrgDockerComposeYaml (peerName: string, peerDomain: string, peerCount: number, ports?: NetworkPeerPortType[]): void  {
     for (let i = 0; i < peerCount; i++) {
       const bootstrapPeerNumber = (i + 1) % peerCount
       const peerDockerComposeYaml = new PeerDockerComposeYaml()

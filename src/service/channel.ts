@@ -289,7 +289,12 @@ export default class Channel extends AbstractService {
     return JSON.parse(this.bdkFile.getChannelConfigString(channelName, 'temp')).data.data[0].payload.data.config
   }
 
-  public static channelConfigFileName (channelName: string) {
+  public static channelConfigFileName (channelName: string): {fetchFileName: string;
+originalFileName: string;
+modifiedFileName: string;
+compareUpdatedConfigFileName: string;
+envelopeFileName: string;
+}  {
     return {
       fetchFileName: `${channelName}_fetch`,
       originalFileName: `${channelName}_config_block`,

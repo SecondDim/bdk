@@ -310,7 +310,7 @@ class ConfigtxYaml extends BdkYaml<ConfigtxInterface> {
     return newPeerOrg
   }
 
-  public addSystemChannelProfile (payload: { name: string; etcdRaftConsenters: EtcdRaftConsentersInterface[]; ordererOrgs: string[]; consortiums: { [cousortiumName: string]: string[] }; batchTimeout?: string; BatchSize?: BatchSizeInterface }) {
+  public addSystemChannelProfile (payload: { name: string; etcdRaftConsenters: EtcdRaftConsentersInterface[]; ordererOrgs: string[]; consortiums: { [cousortiumName: string]: string[] }; batchTimeout?: string; BatchSize?: BatchSizeInterface }): void  {
     // example:
     // name -> 'OrdererGenesis'
     // etcdRaftConsenters -> [{ Host: 'orderer0.ben.cathaybc.com',
@@ -352,7 +352,7 @@ class ConfigtxYaml extends BdkYaml<ConfigtxInterface> {
     this.value.Profiles[payload.name] = newProfile
   }
 
-  public addApplicationChannelProfile (payload: { name: string; consortium: string; organizations: string[] }) {
+  public addApplicationChannelProfile (payload: { name: string; consortium: string; organizations: string[] }): void  {
     // example:
     // name -> 'TestChannel'
     // consortium -> 'TestConsortium'
@@ -368,14 +368,14 @@ class ConfigtxYaml extends BdkYaml<ConfigtxInterface> {
     this.value.Profiles[payload.name] = newProfile
   }
 
-  public setApplicationChannelPolicy (payload: { profileName: string; policyKey: 'Readers' | 'Writers' | 'Admins' | 'LifecycleEndorsement' | 'Endorsement'; policy: PolicyInterface }) {
+  public setApplicationChannelPolicy (payload: { profileName: string; policyKey: 'Readers' | 'Writers' | 'Admins' | 'LifecycleEndorsement' | 'Endorsement'; policy: PolicyInterface }): void  {
     const profile = this.value.Profiles[payload.profileName]
     if ('Application' in profile) {
       profile.Application.Policies[payload.policyKey] = payload.policy
     }
   }
 
-  public importOrgs (data: ConfigtxOrgs) {
+  public importOrgs (data: ConfigtxOrgs): void  {
     this.ordererOrgs = data.ordererOrgs
     this.peerOrgs = data.peerOrgs
   }

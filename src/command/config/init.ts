@@ -6,11 +6,11 @@ export const command = 'init'
 
 export const desc = '初始環境變數'
 
-export const builder = (yargs: Argv) => {
+export const builder = (yargs: Argv): Argv  => {
   return yargs
 }
 
-export const handler = () => {
+export const handler = (): void  => {
   const configService = new Config(config)
 
   configService.init()

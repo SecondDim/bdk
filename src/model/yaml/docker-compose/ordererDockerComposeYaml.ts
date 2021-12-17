@@ -2,7 +2,7 @@ import { Config } from '../../../config'
 import DockerComposeYaml from './dockerComposeYaml'
 
 class OrdererDockerComposeYaml extends DockerComposeYaml {
-  public addOrderer (config: Config, name: string, domain: string, hostname: string, genesisFileName: string, port: number = 7050, operationPort: number = 8443, isPublishPort: boolean = true, isPublishOperationPort: boolean = true) {
+  public addOrderer (config: Config, name: string, domain: string, hostname: string, genesisFileName: string, port: number = 7050, operationPort: number = 8443, isPublishPort: boolean = true, isPublishOperationPort: boolean = true): void  {
     const containerName = `${hostname}.${domain}`
     this.addVolume(containerName, {})
     this.addService(containerName, {

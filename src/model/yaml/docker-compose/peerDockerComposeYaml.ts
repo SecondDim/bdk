@@ -2,7 +2,7 @@ import { Config } from '../../../config'
 import DockerComposeYaml from './dockerComposeYaml'
 
 class PeerDockerComposeYaml extends DockerComposeYaml {
-  public addPeer (config: Config, name: string, domain: string, number: number, bootstrapPeerNumber: number, bootstrapPeerPort: number = 7051, port: number = 7051, operationPort: number = 9443, isPublishPort: boolean = true, isPublishOperationPort: boolean = true) {
+  public addPeer (config: Config, name: string, domain: string, number: number, bootstrapPeerNumber: number, bootstrapPeerPort: number = 7051, port: number = 7051, operationPort: number = 9443, isPublishPort: boolean = true, isPublishOperationPort: boolean = true): void  {
     const containerName = `peer${number}.${domain}`
 
     this.addVolume(containerName, {})

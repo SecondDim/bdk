@@ -26,7 +26,7 @@ class ExplorerConfigYaml extends BdkYaml<ExplorerConfigInterface> {
    * @param name - test-network
    */
 
-  public addNetwork (name: string) {
+  public addNetwork (name: string): void  {
     this.value['network-configs'][name] = {
       name: name,
       profile: `./connection-profile/${name}.json`,

@@ -7,7 +7,7 @@ export const desc = '[TODO] List all orderer org'
 
 export const builder = {}
 
-export const handler = (argv: Arguments) => {
+export const handler = (argv: Arguments): void  => {
   logger.debug('exec orderer org ls', argv.$0)
   // TODO
 }

@@ -96,11 +96,11 @@ class ExplorerConnectionProfileYaml extends BdkYaml<ExplorerConnectionProfileInt
     this.value.peers = {}
   }
 
-  public setAdminCredential (id: string, password: string) {
+  public setAdminCredential (id: string, password: string): void  {
     this.value.client.adminCredential = { id, password }
   }
 
-  public loadFromPeerConnectionProfile (peerConnectProfile: ConnectionProfileYaml) {
+  public loadFromPeerConnectionProfile (peerConnectProfile: ConnectionProfileYaml): void  {
     Object.keys(peerConnectProfile.value.organizations).forEach(org => {
       this.value.organizations[org] = {
         ...peerConnectProfile.value.organizations[org],
@@ -122,15 +122,15 @@ class ExplorerConnectionProfileYaml extends BdkYaml<ExplorerConnectionProfileInt
     }
   }
 
-  public setName (name: string) {
+  public setName (name: string): void  {
     this.value.name = name
   }
 
-  public setVersion (version: string) {
+  public setVersion (version: string): void  {
     this.value.version = version
   }
 
-  public setClientOrganization (orgName: string) {
+  public setClientOrganization (orgName: string): void  {
     this.value.client.organization = orgName
   }
 
@@ -141,7 +141,7 @@ class ExplorerConnectionProfileYaml extends BdkYaml<ExplorerConnectionProfileInt
    * @param tlsPem - -----BEGIN CERTIFICATE-----\nXXXXXXXXX...XXXXXX\n-----END CERTIFICATE-----\n
    * @param port - 7051
    */
-  public addPeer (org: string, peer: string, tlsPem: string, port: number) {
+  public addPeer (org: string, peer: string, tlsPem: string, port: number): void  {
     this.addOrg(org)
 
     this.value.peers[peer] = {
@@ -159,7 +159,7 @@ class ExplorerConnectionProfileYaml extends BdkYaml<ExplorerConnectionProfileInt
    * @param adminPrivateKeyPem - -----BEGIN PRIVATE KEY-----\nXXXXXXXXX...XXXXXX\n-----END PRIVATE KEY-----\n\
    * @param signedCertPem - -----BEGIN CERTIFICATE-----\nXXXXXXXXX...XXXXXX\n-----END CERTIFICATE-----\n\
    */
-  public setOrgKey (org: string, adminPrivateKeyPem: string, signedCertPem: string) {
+  public setOrgKey (org: string, adminPrivateKeyPem: string, signedCertPem: string): void  {
     this.value.organizations[org].adminPrivateKey = { pem: adminPrivateKeyPem }
     this.value.organizations[org].signedCert = { pem: signedCertPem }
   }
@@ -169,7 +169,7 @@ class ExplorerConnectionProfileYaml extends BdkYaml<ExplorerConnectionProfileInt
    * @param channelName - mychannel
    * @param peers - ['peer0.org1.example.com', 'peer0.org2.example.com']
    */
-  public addChannel (channelName: string, peers: string[]) {
+  public addChannel (channelName: string, peers: string[]): void  {
     this.value.channels[channelName] = {
       peers: peers.reduce((accumulator, currentValue) => ({ ...accumulator, [currentValue]: {} }), {}),
       connection: {

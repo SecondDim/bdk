@@ -5,10 +5,10 @@ export const command = 'hello'
 
 export const desc = '歡迎使用 Cathay BDK'
 
-export const builder = (yargs: Argv<any>) => {
+export const builder = (yargs: Argv<any>): Argv  => {
   return yargs
 }
 
-export const handler = (argv: Arguments<any>) => {
+export const handler = (argv: Arguments<any>): void  => {
   hello(argv)
 }

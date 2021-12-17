@@ -7,7 +7,7 @@ export const command = 'update'
 
 export const desc = '更新 Blockchain explorer 連接的 Peer'
 
-export const builder = (yargs: Argv) => {
+export const builder = (yargs: Argv): Argv  => {
   return yargs
 }
 

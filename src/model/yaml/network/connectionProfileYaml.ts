@@ -96,15 +96,15 @@ class ConnectionProfileYaml extends BdkYaml<ConnectionProfileInterface> {
     }
   }
 
-  public setName (name: string) {
+  public setName (name: string): void  {
     this.value.name = name
   }
 
-  public setVersion (version: string) {
+  public setVersion (version: string): void  {
     this.value.version = version
   }
 
-  public setClientOrganization (orgName: string) {
+  public setClientOrganization (orgName: string): void  {
     this.value.client.organization = orgName
   }
 
@@ -115,7 +115,7 @@ class ConnectionProfileYaml extends BdkYaml<ConnectionProfileInterface> {
    * @param tlsPem - -----BEGIN CERTIFICATE-----\nXXXXXXXXX...XXXXXX\n-----END CERTIFICATE-----\n
    * @param port - 7051
    */
-  public addPeer (org: string, peer: string, tlsPem: string, port: number = 7051) {
+  public addPeer (org: string, peer: string, tlsPem: string, port: number = 7051): void  {
     this.addOrg(org)
 
     this.value.peers[peer] = {
@@ -140,7 +140,7 @@ class ConnectionProfileYaml extends BdkYaml<ConnectionProfileInterface> {
    * @param tlsPems - ['-----BEGIN CERTIFICATE-----\nXXXXXXXXX...XXXXXX\n-----END CERTIFICATE-----\n']
    * @param port - 7054
    */
-  public addCertificateAuthorities (org: string, ca: string, caName: string, tlsPems: string[], port?: number) {
+  public addCertificateAuthorities (org: string, ca: string, caName: string, tlsPems: string[], port?: number): void  {
     this.addOrg(org)
 
     this.value.certificateAuthorities[ca] = {

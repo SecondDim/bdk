@@ -7,7 +7,7 @@ export const desc = '[TODO] Remove orderer'
 
 export const builder = {}
 
-export const handler = (argv: Arguments) => {
+export const handler = (argv: Arguments): void  => {
   logger.debug('exec orderer remove', argv.$0)
   // TODO
 }
