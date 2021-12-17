@@ -115,7 +115,7 @@ class ConnectionProfileYaml extends BdkYaml<ConnectionProfileInterface> {
    * @param tlsPem - -----BEGIN CERTIFICATE-----\nXXXXXXXXX...XXXXXX\n-----END CERTIFICATE-----\n
    * @param port - 7051
    */
-  public addPeer (org: string, peer: string, tlsPem: string, port: number = 7051) {
+  public addPeer (org: string, peer: string, tlsPem: string, port = 7051) {
     this.addOrg(org)
 
     this.value.peers[peer] = {

@@ -2,7 +2,7 @@ import { Config } from '../../../config'
 import DockerComposeYaml from './dockerComposeYaml'
 
 class ExplorerDockerComposeYaml extends DockerComposeYaml {
-  constructor (config: Config, port: number = 8080) {
+  constructor (config: Config, port = 8080) {
     super()
     this.addNetwork(config.networkName, { name: config.networkName, external: true })
     this.addVolume(`explorerdb.${config.networkName}`, {})

@@ -2,7 +2,7 @@ import { Config } from '../../../config'
 import DockerComposeYaml from './dockerComposeYaml'
 
 class OrdererDockerComposeYaml extends DockerComposeYaml {
-  public addOrderer (config: Config, name: string, domain: string, hostname: string, genesisFileName: string, port: number = 7050, operationPort: number = 8443, isPublishPort: boolean = true, isPublishOperationPort: boolean = true) {
+  public addOrderer (config: Config, name: string, domain: string, hostname: string, genesisFileName: string, port = 7050, operationPort = 8443, isPublishPort = true, isPublishOperationPort = true) {
     const containerName = `${hostname}.${domain}`
     this.addVolume(containerName, {})
     this.addService(containerName, {
@@ -43,7 +43,7 @@ class OrdererDockerComposeYaml extends DockerComposeYaml {
     })
   }
 
-  public getOrdererOrgEnv (config: Config, name: string, hostname: string, domain: string, port: number = 7054): string {
+  public getOrdererOrgEnv (config: Config, name: string, hostname: string, domain: string, port = 7054): string {
     return [
       `CORE_PEER_MSPCONFIGPATH=${config.infraConfig.dockerPath}/ordererOrganizations/${domain}/users/Admin@${domain}/msp`,
       `CORE_PEER_ADDRESS=${hostname}.${domain}:${port}`,

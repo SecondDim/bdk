@@ -2,7 +2,7 @@ import { Config } from '../../../config'
 import DockerComposeYaml from './dockerComposeYaml'
 
 class PeerDockerComposeYaml extends DockerComposeYaml {
-  public addPeer (config: Config, name: string, domain: string, number: number, bootstrapPeerNumber: number, bootstrapPeerPort: number = 7051, port: number = 7051, operationPort: number = 9443, isPublishPort: boolean = true, isPublishOperationPort: boolean = true) {
+  public addPeer (config: Config, name: string, domain: string, number: number, bootstrapPeerNumber: number, bootstrapPeerPort = 7051, port = 7051, operationPort = 9443, isPublishPort = true, isPublishOperationPort = true) {
     const containerName = `peer${number}.${domain}`
 
     this.addVolume(containerName, {})
@@ -54,7 +54,7 @@ class PeerDockerComposeYaml extends DockerComposeYaml {
     })
   }
 
-  public getPeerOrgEnv (config: Config, name: string, peerIndex: number, domain: string, port: number = 7051): string {
+  public getPeerOrgEnv (config: Config, name: string, peerIndex: number, domain: string, port = 7051): string {
     return [
       'FABRIC_CFG_PATH=/etc/hyperledger/fabric',
       'CORE_PEER_TLS_ENABLED=true',
